@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found</title>
+    <link rel="website icon" type="png" href="img/404.svg">
+    <link rel="stylesheet" href="CSS/bootsrap3.3.5.mini.css">
+    <link rel="stylesheet" href="AOS (Animate On Scroll)/aos.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <style>
+        body {
+            background-image: url(IMG/pic2.jpg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .send-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .send-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .send-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <div style="margin-left: 300px;">
+        <img src="IMG/404.png" width="1000px" height="600px" alt=""><br>
+        <div style="margin-left: -250px;">
+            <div class="send-box">
+                <input style="width: 600px; padding: 10px; border-radius: 8px; text-align: center;" type="email"
+                    placeholder="Enter yor email..." id="email" name="email" required>
+            </div>
+            <div class="send-box">
+                <input type="text" id="message" style="text-align: center;" placeholder="Type your message..."
+                    class="send-input" required>
+                <button class="send-button" onclick="sendEmail()">Send</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function sendEmail() {
+    var email = document.getElementById("email").value;
+    var message = document.getElementById("message").value;
+    var mailtoLink = "mailto:chimsom09@gmail.com" +
+        "?subject=Message from " + encodeURIComponent(email) +
+        "&body=" + encodeURIComponent(message);
+
+    window.location.href = mailtoLink;
+}
+    </script>
+</body>
+
+</html>
