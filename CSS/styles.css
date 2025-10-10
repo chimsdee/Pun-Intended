@@ -284,3 +284,9 @@
 .remember-me {
   transition: all 0.3s ease;
 }
+
+.button-color {
+  background-color: darkcyan !important;
+  color: white !important;
+  font-weight: bold !important;
+}
