@@ -1,5 +1,10 @@
-.main{
+.main {
   background: linear-gradient(to right, lightgray, darkslategray);
+  background: linear-gradient(135deg, #d3d3d3, #2f4f4f);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  transition: opacity 0.8s ease-in;
+  opacity: 0;
 }
 
 .navbar {
@@ -277,6 +282,42 @@
   }
 }
 
+@media (max-width: 768px) {
+  .navbar-nav {
+    gap: 1rem !important;
+  }
+
+  .title-text {
+    font-size: 2rem;
+  }
+
+  .sub-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .card.box {
+    max-width: 90%;
+  }
+
+  .card-body h2 {
+    font-size: 1.4rem;
+  }
+
+  .card-body h5 {
+    font-size: 1rem;
+  }
+
+  .button-color {
+    width: 100%;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem !important;
+  }
+}
+
 .confirm-password-group {
   transition: all 0.3s ease;
 }
@@ -289,4 +330,62 @@
   background-color: darkcyan !important;
   color: white !important;
   font-weight: bold !important;
+  transition: all 0.3s ease;
+  border-radius: 30px;
+  padding: 10px 25px;
+}
+
+.button-color:hover {
+  background-color: #008b8b !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.title-text {
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.sub-text {
+  color: #f5f5f5;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 1.6;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.card.box {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.card.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-body {
+  text-align: center;
+}
+
+.card-title {
+  color: darkslategray;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  font-size: 1rem;
+}
+
+body.loaded {
+  opacity: 1;
 }

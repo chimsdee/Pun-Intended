@@ -1,3 +1,5 @@
+window.addEventListener("load", () => document.body.classList.add("loaded"));
+
 document.getElementById('togglepassword')
     .addEventListener('change', function () {
         var passwordinput = document.getElementById('password');
