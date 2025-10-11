@@ -1,6 +1,25 @@
+:root {
+  --brand: #ff9800;
+  --accent: #0077b6;
+  --muted: #5f6368;
+  --card-bg: rgba(255, 255, 255, 0.4);
+  --glass: rgba(255, 255, 255, 0.7);
+  --success: #2a9d8f;
+  --danger: #e63946;
+}
+
 .main {
-  background: linear-gradient(to right, lightgray, darkslategray);
   background: linear-gradient(135deg, #d3d3d3, #2f4f4f);
+  min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+  transition: opacity 0.8s ease-in;
+  opacity: 0;
+}
+
+.jokes-page {
+  background-image: url("../IMG/laugh.jpg");
+  background-size: cover;
+  background-position: center;
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
   transition: opacity 0.8s ease-in;
@@ -218,114 +237,6 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@media (max-width: 768px) {
-  .login-form {
-    padding: 1.5rem;
-    min-height: calc(100vh - 140px);
-  }
-
-  .login-form form {
-    padding: 1.5rem;
-  }
-
-  .login-form h1 b {
-    font-size: 36px;
-  }
-
-  .navbar-brand {
-    font-size: 24px !important;
-  }
-
-  .navbar-text {
-    font-size: 14px !important;
-  }
-
-  .form-options {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .remember-me {
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 576px) {
-  .login-form {
-    padding: 1rem;
-  }
-
-  .login-form form {
-    padding: 1.5rem;
-  }
-
-  .login-form h1 b {
-    font-size: 32px;
-  }
-
-  .toggle-btn {
-    padding: 8px 20px;
-    font-size: 14px;
-  }
-
-  .form-toggle {
-    width: 90%;
-  }
-
-  .glow-button {
-    width: 100%;
-    padding: 12px;
-  }
-
-  .navbar-brand {
-    font-size: 20px !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .navbar-nav {
-    gap: 1rem !important;
-  }
-
-  .title-text {
-    font-size: 2rem;
-  }
-
-  .sub-text {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .card.box {
-    max-width: 90%;
-  }
-
-  .card-body h2 {
-    font-size: 1.4rem;
-  }
-
-  .card-body h5 {
-    font-size: 1rem;
-  }
-
-  .button-color {
-    width: 100%;
-  }
-
-  .navbar-brand {
-    font-size: 1.3rem !important;
-  }
-}
-
-.confirm-password-group {
-  transition: all 0.3s ease;
-}
-
-.remember-me {
-  transition: all 0.3s ease;
-}
-
 .button-color {
   background-color: darkcyan !important;
   color: white !important;
@@ -388,4 +299,248 @@
 
 body.loaded {
   opacity: 1;
+}
+
+/* Jokes Page Specific Styles */
+.joke-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.joke-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.joke-card .card-title {
+  color: var(--accent);
+  font-weight: bolder;
+  letter-spacing: 0.2px;
+}
+
+.joke-area {
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.28s ease, opacity 0.28s ease;
+}
+
+.joke-area.fade-in {
+  animation: fadeIn 260ms ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#setup {
+  color: #1c1c1c;
+  margin-bottom: 0.25rem;
+  font-size: 1.1rem;
+  font-weight: bolder;
+}
+
+#punchline {
+  color: snow;
+  font-size: 1.25rem;
+  font-weight: bolder;
+  margin-top: 0.5rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), rgba(0, 119, 182, 0.25));
+  display: inline-block;
+}
+
+.btn-warning {
+  background: linear-gradient(90deg, var(--brand), #ffb703);
+  border: none;
+  box-shadow: 0 6px 18px rgba(255, 183, 3, 0.1);
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-warning:hover {
+  filter: brightness(1.1);
+}
+
+.btn-outline-success,
+.btn-outline-danger {
+  min-width: 120px;
+  font-weight: 600;
+}
+
+.btn-outline-success {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.btn-outline-success:hover {
+  background: var(--success);
+  color: #fff;
+}
+
+.btn-outline-danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.btn-outline-danger:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.list-group-item {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.6rem 0.75rem;
+  color: #333;
+}
+
+.history-setup {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+.history-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+kbd {
+  background: #0b1220;
+  color: snow;
+  border-radius: 4px;
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.hidden {
+  display: none !important;
+}
+
+body.jokes-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main.container {
+  flex: 1 0 auto;
+}
+
+footer.footer {
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-form {
+    padding: 1.5rem;
+    min-height: calc(100vh - 140px);
+  }
+
+  .login-form form {
+    padding: 1.5rem;
+  }
+
+  .login-form h1 b {
+    font-size: 36px;
+  }
+
+  .navbar-brand {
+    font-size: 24px !important;
+  }
+
+  .navbar-text {
+    font-size: 14px !important;
+  }
+
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .remember-me {
+    margin-top: 10px;
+  }
+
+  .navbar-nav {
+    gap: 1rem !important;
+  }
+
+  .title-text {
+    font-size: 2rem;
+  }
+
+  .sub-text {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .login-form {
+    padding: 1rem;
+  }
+
+  .login-form form {
+    padding: 1.5rem;
+  }
+
+  .login-form h1 b {
+    font-size: 32px;
+  }
+
+  .toggle-btn {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+
+  .form-toggle {
+    width: 90%;
+  }
+
+  .glow-button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .navbar-brand {
+    font-size: 20px !important;
+  }
+
+  .card.box {
+    max-width: 90%;
+  }
+
+  .card-body h2 {
+    font-size: 1.4rem;
+  }
+
+  .card-body h5 {
+    font-size: 1rem;
+  }
+
+  .button-color {
+    width: 100%;
+  }
+
+  .navbar-brand {
+    font-size: 1.3rem !important;
+  }
 }
