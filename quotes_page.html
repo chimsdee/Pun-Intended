@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pun Intended - Quotes</title>
+  <link rel="icon" type="image/png" href="./IMG/main.svg">
+  <link rel="stylesheet" href="./CSS/bootstrap.css">
+  <link rel="stylesheet" href="./CSS/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+
+<body class="quotes-page">
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="quotes_page.html">
+          <i class="fas fa-laugh-wink me-2"></i> Pun Intended
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto gap-4">
+            <li class="nav-item">
+              <a class="nav-link" href="main_page.html">
+                <i class="fas fa-home me-1"></i> Main
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="quotes_page.html" style="font-weight: bold;">
+                <i class="fas fa-book-open me-1"></i> Quotes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="jokes_page.html">
+                <i class="fas fa-laugh-beam me-1"></i> Jokes
+              </a>
+            </li>
+          </ul>
+          <li class="nav-item ms-auto">
+            <a class="nav-link" href="index.html" style="color: white;">
+              <i class="fas fa-sign-out me-1"></i> Logout
+            </a>
+          </li>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container text-center mt-5 pt-5">
+    <!-- Your main content remains the same -->
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-9 col-lg-7">
+        <div class="card quote-card shadow-lg mb-3" style="background-color: rgb(197, 227, 250);">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h5 class="card-title mb-1">Quote of the Moment</h5>
+                <blockquote class="text-muted" id="quote-source" style="font-weight: bold;">Source: Official Quote API
+                </blockquote>
+              </div>
+              <div class="text-end">
+                <strong class="text-muted">Generated: <span id="generatedCount">0</span></strong>
+              </div>
+            </div>
+
+            <div id="quoteArea" class="quote-area">
+              <p id="quote" class="quote-text lead mb-3 text-wrap" aria-live="polite">Click <strong>Generate</strong> to
+                fetch an inspiring quote.</p>
+              <p id="author" class="quote-author fs-5 text-wrap"></p>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center mt-4">
+              <button id="generateBtn" class="btn btn-warning btn-lg shadow-sm">
+                <i class="fas fa-bolt me-2"></i><span class="btn-text">Generate</span>
+              </button>
+
+              <div class="btn btn-group-lg" role="group" aria-label="reaction buttons">
+                <button id="likeBtn" class="btn btn-outline-success" style="border: transparent;" title="Like (L)">
+                  <i class="fas fa-thumbs-up me-2"></i><span id="likeCount">0</span>
+                </button>
+                <button id="dislikeBtn" class="btn btn-outline-danger" style="border: transparent;" title="Dislike (D)">
+                  <i class="fas fa-thumbs-down me-2"></i><span id="dislikeCount">0</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="mt-3 d-flex justify-content-between align-items-center">
+              <small class="text-muted">Shortcuts: <kbd>G</kbd> Generate • <kbd>L</kbd> Like • <kbd>D</kbd>
+                Dislike</small>
+              <div>
+                <button id="historyToggle" class="btn btn-sm btn-outline-secondary"
+                  style="border: transparent; font-weight: bold;">View History</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="historyPanel" class="card d-none">
+          <div class="card-body p-3">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="mb-0">History</h6>
+              <div>
+                <button id="clearHistory" class="btn btn-sm btn-danger">Clear</button>
+              </div>
+            </div>
+            <ul id="historyList" class="list-group list-group-flush" style="max-height: 260px; overflow:auto;"></ul>
+            <div class="mt-3 text-end">
+              <small class="text-muted">Stored locally in your browser.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="confirmClearModal" tabindex="-1" aria-labelledby="confirmClearLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light border-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmClearLabel">Confirm Reset</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-start">
+            <p>
+              You're about to permanently delete all your quote history and reset your like/dislike counts back to zero.
+              This action can't be undone.
+            </p>
+            <p class="mb-0"><strong>Are you sure you want to proceed?</strong></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button id="confirmClearBtn" type="button" class="btn btn-danger">Yes, Reset Everything</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer py-3 bg-dark mt-4">
+    <div class="container text-center">
+      <small class="text-light">
+        &copy; 2025 Pun Intended. Made for laughter & inspiration
+        <span class="mx-2">|</span>
+        <a href="privacy.html" class="text-light text-decoration-none me-2">Privacy Policy</a>
+        <a href="terms.html" class="text-light text-decoration-none me-2">Terms of Service</a>
+        <a href="contact.html" class="text-light text-decoration-none">Contact</a>
+      </small>
+    </div>
+  </footer>
+
+  <!-- Your JavaScript remains the same -->
+  <script src="JS/bootstrap.js"></script>
+  <script src="JS/script.js"></script>
+  <script>
+    (() => {
+      // Multiple API endpoints as fallbacks
+      const API_ENDPOINTS = [
+        'https://api.quotable.io/random',
+        'https://quote-garden.onrender.com/api/v3/quotes/random',
+        'https://type.fit/api/quotes'
+      ];
+
+      const generateBtn = document.getElementById('generateBtn');
+      const likeBtn = document.getElementById('likeBtn');
+      const dislikeBtn = document.getElementById('dislikeBtn');
+      const quoteEl = document.getElementById('quote');
+      const authorEl = document.getElementById('author');
+      const generatedCountEl = document.getElementById('generatedCount');
+      const likeCountEl = document.getElementById('likeCount');
+      const dislikeCountEl = document.getElementById('dislikeCount');
+      const historyToggle = document.getElementById('historyToggle');
+      const historyPanel = document.getElementById('historyPanel');
+      const historyList = document.getElementById('historyList');
+      const clearHistory = document.getElementById('clearHistory');
+      const quoteSource = document.getElementById('quote-source');
+      const quoteArea = document.getElementById('quoteArea');
+
+      const confirmClearModalEl = document.getElementById('confirmClearModal');
+      const confirmClearBtn = document.getElementById('confirmClearBtn');
+      const confirmClearModal = confirmClearModalEl ? new bootstrap.Modal(confirmClearModalEl) : null;
+
+      // Local fallback quotes in case all APIs fail
+      const FALLBACK_QUOTES = [
+        { content: "He who has a why to live can bear almost any how", author: "Friedrich Nietzsche" },
+        { content: "The unexamined life is not worth living.", author: "Socrates" },
+        { content: "Until you make the unconscious conscious, it will direct your life and you will call it fate.", author: "Carl Jung" },
+        { content: "You have power over your mind, not outside events. Realize this, and you will find strength.", author: "Marcus Aurelius" },
+        { content: "The important thing is not to stop questioning. Curiosity has its own reason for existing.", author: "Albert Einstein" },
+        { content: "I can be changed by what happens to me. But I refuse to be reduced by it.", author: "Maya Angelou" },
+        { content: "When I let go of what I am, I become what I might be.", author: "Lao Tzu" },
+        { content: "Everything can be taken from a man but one thing: the last of the human freedoms to choose one's attitude in any given set of circumstances.", author: "Viktor Frankl" },
+        { content: "The wound is the place where the Light enters you.", author: "Rumi" },
+        { content: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
+        { content: "You are an aperture through which the universe is looking at and exploring itself.", author: "Alan Watts" },
+        { content: "The mystery of human existence lies not in just staying alive, but in finding something to live for.", author: "Fyodor Dostoevsky" },
+        { content: "Out of suffering have emerged the strongest souls; the most massive characters are seared with scars.", author: "Kahlil Gibran" },
+        { content: "It does not matter how slowly you go as long as you do not stop.", author: "Confucius" },
+        { content: "I think, therefore I am.", author: "René Descartes" },
+        { content: "We suffer more often in imagination than in reality.", author: "Seneca" },
+        { content: "In a time of deceit, telling the truth is a revolutionary act.", author: "George Orwell" },
+        { content: "Freedom is what you do with what's been done to you.", author: "Jean-Paul Sartre" },
+        { content: "Be like water, shapeless and formless. Adapt to whatever is in front of you.", author: "Bruce Lee" },
+        { content: "I never lose. I either win or learn.", author: "Nelson Mandela" }
+      ];
+
+      // LocalStorage keys
+      const LS_KEYS = {
+        stats: 'pi_quote_stats_v1',
+        history: 'pi_quote_history_v1'
+      };
+
+      let lastQuote = null;
+      let isLoading = false;
+      let currentApiIndex = 0;
+
+      /* ---------- STORAGE UTILS ---------- */
+      const defaultStats = { generated: 0, likes: 0, dislikes: 0 };
+
+      function loadStats() {
+        try {
+          const raw = localStorage.getItem(LS_KEYS.stats);
+          return raw ? JSON.parse(raw) : defaultStats;
+        } catch {
+          return defaultStats;
+        }
+      }
+
+      function saveStats(s) {
+        localStorage.setItem(LS_KEYS.stats, JSON.stringify(s));
+      }
+
+      function loadHistory() {
+        try {
+          const raw = localStorage.getItem(LS_KEYS.history);
+          return raw ? JSON.parse(raw) : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function saveHistory(h) {
+        localStorage.setItem(LS_KEYS.history, JSON.stringify(h));
+      }
+
+      /* ---------- UI HELPERS ---------- */
+      function refreshCounters() {
+        const s = loadStats();
+        generatedCountEl.textContent = s.generated;
+        likeCountEl.textContent = s.likes;
+        dislikeCountEl.textContent = s.dislikes;
+      }
+
+      function animateQuote() {
+        quoteArea.classList.remove('fade-in');
+        void quoteArea.offsetWidth;
+        quoteArea.classList.add('fade-in');
+      }
+
+      function flashTemp(btn, text, timeout = 900) {
+        const prev = btn.innerHTML;
+        btn.innerHTML = text;
+        setTimeout(() => (btn.innerHTML = prev), timeout);
+      }
+
+      function escapeHtml(str = '') {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+      }
+
+      function showError(msg = "Couldn't fetch a quote. Try again.") {
+        quoteEl.textContent = msg;
+        authorEl.textContent = '';
+        quoteSource.textContent = 'Source: Offline';
+        animateQuote();
+      }
+
+      function displayQuote(content, author, source) {
+        quoteEl.textContent = content || '—';
+        authorEl.textContent = author ? `By ${author}` : '';
+        quoteSource.textContent = `Source: ${source}`;
+        animateQuote();
+
+        const stats = loadStats();
+        stats.generated = (stats.generated || 0) + 1;
+        saveStats(stats);
+        refreshCounters();
+      }
+
+      /* ---------- API FETCHING WITH FALLBACKS ---------- */
+      async function tryFetchQuote(apiUrl) {
+        try {
+          const response = await fetch(apiUrl, {
+            cache: 'no-store',
+            timeout: 5000
+          });
+
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return await response.json();
+        } catch (error) {
+          console.warn(`Failed to fetch from ${apiUrl}:`, error);
+          return null;
+        }
+      }
+
+      function getRandomFallbackQuote() {
+        const randomIndex = Math.floor(Math.random() * FALLBACK_QUOTES.length);
+        return FALLBACK_QUOTES[randomIndex];
+      }
+
+      async function fetchQuote() {
+        if (isLoading) return;
+        isLoading = true;
+
+        generateBtn.setAttribute('disabled', 'disabled');
+        const prevHtml = generateBtn.innerHTML;
+        generateBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>Loading`;
+
+        try {
+          let quoteData = null;
+          let sourceName = 'Local Fallback';
+
+          // Try each API endpoint until we get a successful response
+          for (let i = 0; i < API_ENDPOINTS.length; i++) {
+            const apiIndex = (currentApiIndex + i) % API_ENDPOINTS.length;
+            const apiUrl = API_ENDPOINTS[apiIndex];
+
+            quoteData = await tryFetchQuote(apiUrl);
+
+            if (quoteData) {
+              currentApiIndex = apiIndex; // Remember which API worked
+
+              // Parse the response based on which API we're using
+              if (apiUrl.includes('quotable.io')) {
+                sourceName = 'Quotable API';
+                lastQuote = {
+                  _id: quoteData._id,
+                  content: quoteData.content,
+                  author: quoteData.author
+                };
+              } else if (apiUrl.includes('quote-garden')) {
+                sourceName = 'Quote Garden';
+                lastQuote = {
+                  _id: quoteData.data[0]._id,
+                  content: quoteData.data[0].quoteText,
+                  author: quoteData.data[0].quoteAuthor || 'Unknown'
+                };
+              } else if (apiUrl.includes('type.fit')) {
+                sourceName = 'Type.fit API';
+                const quotes = Array.isArray(quoteData) ? quoteData : [quoteData];
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                lastQuote = {
+                  _id: 'typefit-' + Date.now(),
+                  content: randomQuote.text,
+                  author: randomQuote.author ? randomQuote.author.replace(', type.fit', '') : 'Unknown'
+                };
+              }
+
+              break;
+            }
+          }
+
+          // If all APIs failed, use fallback quotes
+          if (!quoteData) {
+            const fallbackQuote = getRandomFallbackQuote();
+            lastQuote = {
+              _id: 'fallback-' + Date.now(),
+              content: fallbackQuote.content,
+              author: fallbackQuote.author
+            };
+          }
+
+          // Display the quote
+          displayQuote(lastQuote.content, lastQuote.author, sourceName);
+
+        } catch (err) {
+          console.error('Error fetching quote:', err);
+          // Even if everything fails, use a fallback quote
+          const fallbackQuote = getRandomFallbackQuote();
+          lastQuote = {
+            _id: 'fallback-' + Date.now(),
+            content: fallbackQuote.content,
+            author: fallbackQuote.author
+          };
+          displayQuote(lastQuote.content, lastQuote.author, 'Local Fallback');
+        } finally {
+          isLoading = false;
+          generateBtn.removeAttribute('disabled');
+          generateBtn.innerHTML = prevHtml;
+        }
+      }
+
+      /* ---------- HISTORY RENDERING ---------- */
+      function renderHistory() {
+        const items = loadHistory();
+        historyList.innerHTML = '';
+        if (!items.length) {
+          const li = document.createElement('li');
+          li.className = 'list-group-item text-muted';
+          li.textContent = 'No rated quotes yet. Like or dislike a quote to build history.';
+          historyList.appendChild(li);
+          return;
+        }
+
+        items
+          .slice()
+          .reverse()
+          .forEach((it) => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item d-flex justify-content-between align-items-start';
+
+            const left = document.createElement('div');
+            left.style.maxWidth = '78%';
+            left.innerHTML = `
+          <div class="history-setup">${escapeHtml(it.content)}</div>
+          <div class="history-meta">— ${escapeHtml(it.author)}</div>
+          <div class="history-meta small mt-1">
+            ${new Date(it.ts).toLocaleString()} • ${it.rating.toUpperCase()}
+          </div>`;
+
+            const right = document.createElement('div');
+            right.className = 'd-flex flex-column gap-1 align-items-end';
+
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'btn btn-sm btn-outline-secondary';
+            copyBtn.textContent = 'Copy';
+            copyBtn.onclick = () => {
+              navigator.clipboard?.writeText(`"${it.content}" — ${it.author}`).then(() => {
+                flashTemp(copyBtn, 'Copied');
+              });
+            };
+
+            const removeBtn = document.createElement('button');
+            removeBtn.className = 'btn btn-sm btn-danger';
+            removeBtn.textContent = 'Remove';
+            removeBtn.onclick = () => removeHistoryItem(it.id, it.ts);
+
+            right.appendChild(copyBtn);
+            right.appendChild(removeBtn);
+
+            li.appendChild(left);
+            li.appendChild(right);
+            historyList.appendChild(li);
+          });
+      }
+
+      function removeHistoryItem(id, ts) {
+        const items = loadHistory();
+        const idx = items.findIndex((x) => x.id === id && x.ts === ts);
+        if (idx > -1) {
+          items.splice(idx, 1);
+          saveHistory(items);
+          renderHistory();
+          flashTemp(clearHistory, 'Removed');
+        }
+      }
+
+      /* ---------- RATING ---------- */
+      function rateCurrent(rating) {
+        if (!lastQuote || !lastQuote.content) {
+          flashTemp(generateBtn, 'Generate first', 900);
+          return;
+        }
+
+        const hist = loadHistory();
+        const entry = {
+          id: lastQuote._id ?? 'local-' + Date.now(),
+          content: lastQuote.content ?? '',
+          author: lastQuote.author ?? 'Unknown',
+          rating,
+          ts: Date.now()
+        };
+        hist.push(entry);
+        saveHistory(hist);
+
+        const stats = loadStats();
+        if (rating === 'like') stats.likes = (stats.likes || 0) + 1;
+        else stats.dislikes = (stats.dislikes || 0) + 1;
+        saveStats(stats);
+
+        refreshCounters();
+        renderHistory();
+        flashTemp(rating === 'like' ? likeBtn : dislikeBtn, 'Saved', 700);
+      }
+
+      /* ---------- RESET + MODAL ---------- */
+      function resetAllData() {
+        localStorage.removeItem(LS_KEYS.history);
+        localStorage.removeItem(LS_KEYS.stats);
+        renderHistory();
+        refreshCounters();
+        flashTemp(clearHistory, 'Reset done');
+      }
+
+      function showResetModal() {
+        if (confirmClearModal) confirmClearModal.show();
+      }
+
+      if (confirmClearBtn) {
+        confirmClearBtn.addEventListener('click', () => {
+          if (confirmClearModal) confirmClearModal.hide();
+          resetAllData();
+        });
+      }
+
+      /* ---------- KEYBOARD SHORTCUTS ---------- */
+      function onKey(e) {
+        if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+        const key = e.key.toLowerCase();
+        if (key === 'g') fetchQuote();
+        if (key === 'l') rateCurrent('like');
+        if (key === 'd') rateCurrent('dislike');
+      }
+
+      /* ---------- HISTORY TOGGLE ---------- */
+      function toggleHistory() {
+        historyPanel.classList.toggle('d-none');
+        if (!historyPanel.classList.contains('d-none')) {
+          renderHistory();
+          historyToggle.textContent = 'Hide History';
+        } else {
+          historyToggle.textContent = 'View History';
+        }
+      }
+
+      /* ---------- INIT ---------- */
+      function init() {
+        refreshCounters();
+        renderHistory();
+
+        generateBtn.addEventListener('click', fetchQuote);
+        likeBtn.addEventListener('click', () => rateCurrent('like'));
+        dislikeBtn.addEventListener('click', () => rateCurrent('dislike'));
+        historyToggle.addEventListener('click', toggleHistory);
+        clearHistory.addEventListener('click', showResetModal);
+        window.addEventListener('keydown', onKey);
+      }
+
+      init();
+    })();
+  </script>
+</body>
+
+</html>
