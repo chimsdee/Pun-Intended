@@ -37,7 +37,6 @@ footer {
   flex-shrink: 0;
 }
 
-/* Page Background Styles */
 .main {
   background: linear-gradient(135deg, #d3d3d3, #2f4f4f) no-repeat center center
     fixed;
@@ -90,7 +89,6 @@ footer {
   z-index: 1;
 }
 
-/* Navigation */
 .navbar {
   z-index: 1030;
   position: relative;
@@ -115,7 +113,6 @@ footer {
   color: darkcyan !important;
 }
 
-/* Login Form */
 .login-form {
   background: url("../IMG/landing.jpg") no-repeat center center;
   background-size: cover;
@@ -298,7 +295,6 @@ footer {
   transform: translateY(-1px);
 }
 
-/* Cards */
 .card.box {
   border: none;
   border-radius: 15px;
@@ -331,7 +327,6 @@ footer {
   font-size: 1rem;
 }
 
-/* Jokes & Quotes Cards */
 .joke-card,
 .quote-card {
   border-radius: 12px;
@@ -356,7 +351,6 @@ footer {
   letter-spacing: 0.2px;
 }
 
-/* Content Areas */
 .joke-area,
 .quote-area {
   min-height: 110px;
@@ -383,7 +377,6 @@ footer {
   }
 }
 
-/* Text Styles */
 .title-text {
   color: #fff;
   font-size: clamp(2rem, 5vw, 2.8rem);
@@ -442,7 +435,6 @@ footer {
   display: inline-block;
 }
 
-/* Buttons */
 .button-color {
   background-color: darkcyan !important;
   color: white !important;
@@ -496,7 +488,6 @@ footer {
   color: #fff;
 }
 
-/* History & Lists */
 .list-group-item {
   background: transparent;
   border: none;
@@ -516,12 +507,10 @@ footer {
   color: var(--muted);
 }
 
-/* Footer */
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Utilities */
 kbd {
   background: #0b1220;
   color: snow;
@@ -538,7 +527,7 @@ body.loaded {
   opacity: 1;
 }
 
-/* Responsive Design */
+/* Responsive CSS */
 @media (max-width: 768px) {
   .login-form {
     padding: 1.5rem;

@@ -1,7 +1,5 @@
-// Page load animation
 window.addEventListener("load", () => document.body.classList.add("loaded"));
 
-// Main application initialization
 document.addEventListener('DOMContentLoaded', function () {
     initializeFormToggle();
     initializePasswordToggle();
@@ -9,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     initializeInputAnimations();
 });
 
-// Form toggle functionality
 function initializeFormToggle() {
     const loginBtn = document.getElementById('login-toggle');
     const signupBtn = document.getElementById('signup-toggle');
@@ -67,7 +64,6 @@ function showSignupForm() {
     console.log('Switched to Sign Up form');
 }
 
-// Password visibility toggle
 function initializePasswordToggle() {
     const toggleCheckbox = document.getElementById('togglepassword');
 
@@ -91,7 +87,6 @@ function initializePasswordToggle() {
     }
 }
 
-// Form submission handling
 function initializeFormSubmission() {
     const submitBtn = document.getElementById('submit-btn');
     const form = document.getElementById('auth-form');
@@ -122,10 +117,8 @@ function initializeFormSubmission() {
                 }
             }
 
-            // Add loading state
             this.classList.add('loading');
 
-            // Simulate form processing
             setTimeout(() => {
                 this.classList.remove('loading');
                 window.location.href = 'main_page.html';
@@ -134,7 +127,6 @@ function initializeFormSubmission() {
     }
 }
 
-// Input field animations
 function initializeInputAnimations() {
     const inputs = document.querySelectorAll('.user-input input');
 

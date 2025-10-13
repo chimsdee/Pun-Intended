@@ -185,7 +185,6 @@
       let lastJoke = null;
       let isLoading = false;
 
-      /* ---------- STORAGE UTILS ---------- */
       const defaultStats = { generated: 0, likes: 0, dislikes: 0 };
 
       function loadStats() {
@@ -214,7 +213,6 @@
         localStorage.setItem(LS_KEYS.history, JSON.stringify(h));
       }
 
-      /* ---------- UI HELPERS ---------- */
       function refreshCounters() {
         const s = loadStats();
         generatedCountEl.textContent = s.generated;
@@ -248,7 +246,6 @@
         animateJoke();
       }
 
-      /* ---------- HISTORY RENDERING ---------- */
       function renderHistory() {
         const items = loadHistory();
         historyList.innerHTML = '';
@@ -313,7 +310,7 @@
         }
       }
 
-      /* ---------- API FETCH ---------- */
+      // Fetch and display a new joke (API)
       async function fetchJoke() {
         if (isLoading) return;
         isLoading = true;
@@ -354,7 +351,6 @@
         }
       }
 
-      /* ---------- RATING ---------- */
       function rateCurrent(rating) {
         if (!lastJoke || (!lastJoke.setup && !lastJoke.punchline)) {
           flashTemp(generateBtn, 'Generate first', 900);
@@ -382,7 +378,6 @@
         flashTemp(rating === 'like' ? likeBtn : dislikeBtn, 'Saved', 700);
       }
 
-      /* ---------- RESET + MODAL ---------- */
       function resetAllData() {
         localStorage.removeItem(LS_KEYS.history);
         localStorage.removeItem(LS_KEYS.stats);
@@ -402,7 +397,6 @@
         });
       }
 
-      /* ---------- KEYBOARD SHORTCUTS ---------- */
       function onKey(e) {
         if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
         const key = e.key.toLowerCase();
@@ -411,7 +405,6 @@
         if (key === 'd') rateCurrent('dislike');
       }
 
-      /* ---------- HISTORY TOGGLE ---------- */
       function toggleHistory() {
         historyPanel.classList.toggle('d-none');
         if (!historyPanel.classList.contains('d-none')) {
@@ -422,7 +415,6 @@
         }
       }
 
-      /* ---------- INIT ---------- */
       function init() {
         refreshCounters();
         renderHistory();

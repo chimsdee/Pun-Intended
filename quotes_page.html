@@ -53,7 +53,6 @@
   </header>
 
   <main class="container text-center mt-5 pt-5">
-    <!-- Your main content remains the same -->
     <div class="row justify-content-center">
       <div class="col-12 col-md-9 col-lg-7">
         <div class="card quote-card shadow-lg mb-3" style="background-color: rgb(197, 227, 250);">
@@ -152,12 +151,10 @@
     </div>
   </footer>
 
-  <!-- Your JavaScript remains the same -->
   <script src="JS/bootstrap.js"></script>
   <script src="JS/script.js"></script>
   <script>
     (() => {
-      // Multiple API endpoints as fallbacks
       const API_ENDPOINTS = [
         'https://api.quotable.io/random',
         'https://quote-garden.onrender.com/api/v3/quotes/random',
@@ -217,7 +214,6 @@
       let isLoading = false;
       let currentApiIndex = 0;
 
-      /* ---------- STORAGE UTILS ---------- */
       const defaultStats = { generated: 0, likes: 0, dislikes: 0 };
 
       function loadStats() {
@@ -246,7 +242,6 @@
         localStorage.setItem(LS_KEYS.history, JSON.stringify(h));
       }
 
-      /* ---------- UI HELPERS ---------- */
       function refreshCounters() {
         const s = loadStats();
         generatedCountEl.textContent = s.generated;
@@ -292,7 +287,6 @@
         refreshCounters();
       }
 
-      /* ---------- API FETCHING WITH FALLBACKS ---------- */
       async function tryFetchQuote(apiUrl) {
         try {
           const response = await fetch(apiUrl, {
@@ -325,7 +319,6 @@
           let quoteData = null;
           let sourceName = 'Local Fallback';
 
-          // Try each API endpoint until we get a successful response
           for (let i = 0; i < API_ENDPOINTS.length; i++) {
             const apiIndex = (currentApiIndex + i) % API_ENDPOINTS.length;
             const apiUrl = API_ENDPOINTS[apiIndex];
@@ -333,8 +326,7 @@
             quoteData = await tryFetchQuote(apiUrl);
 
             if (quoteData) {
-              currentApiIndex = apiIndex; // Remember which API worked
-
+              currentApiIndex = apiIndex;
               // Parse the response based on which API we're using
               if (apiUrl.includes('quotable.io')) {
                 sourceName = 'Quotable API';
@@ -365,7 +357,6 @@
             }
           }
 
-          // If all APIs failed, use fallback quotes
           if (!quoteData) {
             const fallbackQuote = getRandomFallbackQuote();
             lastQuote = {
@@ -375,12 +366,11 @@
             };
           }
 
-          // Display the quote
           displayQuote(lastQuote.content, lastQuote.author, sourceName);
 
         } catch (err) {
           console.error('Error fetching quote:', err);
-          // Even if everything fails, use a fallback quote
+          // Even those api's fail this will generate a fallback quote
           const fallbackQuote = getRandomFallbackQuote();
           lastQuote = {
             _id: 'fallback-' + Date.now(),
@@ -395,7 +385,6 @@
         }
       }
 
-      /* ---------- HISTORY RENDERING ---------- */
       function renderHistory() {
         const items = loadHistory();
         historyList.innerHTML = '';
@@ -460,7 +449,6 @@
         }
       }
 
-      /* ---------- RATING ---------- */
       function rateCurrent(rating) {
         if (!lastQuote || !lastQuote.content) {
           flashTemp(generateBtn, 'Generate first', 900);
@@ -488,7 +476,6 @@
         flashTemp(rating === 'like' ? likeBtn : dislikeBtn, 'Saved', 700);
       }
 
-      /* ---------- RESET + MODAL ---------- */
       function resetAllData() {
         localStorage.removeItem(LS_KEYS.history);
         localStorage.removeItem(LS_KEYS.stats);
@@ -508,7 +495,6 @@
         });
       }
 
-      /* ---------- KEYBOARD SHORTCUTS ---------- */
       function onKey(e) {
         if (document.activeElement && ['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
         const key = e.key.toLowerCase();
@@ -517,7 +503,6 @@
         if (key === 'd') rateCurrent('dislike');
       }
 
-      /* ---------- HISTORY TOGGLE ---------- */
       function toggleHistory() {
         historyPanel.classList.toggle('d-none');
         if (!historyPanel.classList.contains('d-none')) {
@@ -528,7 +513,6 @@
         }
       }
 
-      /* ---------- INIT ---------- */
       function init() {
         refreshCounters();
         renderHistory();
