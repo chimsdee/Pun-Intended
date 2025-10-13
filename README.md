@@ -30,7 +30,7 @@ A responsive web application that delivers daily laughter and inspiration throug
 
 ## Quick Start
 
-1. **Open** `index.html` in your web browser
+1. **Open** `https://chimsdee.github.io/Pun-Intended/` in your web browser
 2. **Sign Up** or **Log In** with username (3+ chars) and password (6+ chars)
 3. **Choose** between Jokes or Quotes on the main dashboard
 4. **Generate** content and rate with Like/Dislike buttons
