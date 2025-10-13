@@ -35,7 +35,7 @@ A responsive web application that delivers daily laughter and inspiration throug
 3. **Choose** between Jokes or Quotes on the main dashboard
 4. **Generate** content and rate with Like/Dislike buttons
 
-## 🎯 Usage Guide
+## Usage Guide
 
 ### For Jokes:
 
@@ -64,9 +64,5 @@ A responsive web application that delivers daily laughter and inspiration throug
 - **Icons**: Font Awesome 6.0
 - **Storage**: localStorage API
 - **APIs**: RESTful JSON APIs
-
-## 📁 Project Structure
-
-=======
 
 # Pun-Intended
