@@ -52,7 +52,7 @@ footer {
 
 .jokes-page::before {
   content: "";
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -67,7 +67,7 @@ footer {
 }
 
 .quotes-page {
-  background: url("../IMG/quotes.jpg") no-repeat center center fixed;
+  background: url("../IMG/quotes.jpg") no-repeat center center fixed ;
   background-size: cover;
   min-height: 100vh;
   position: relative;
@@ -75,7 +75,7 @@ footer {
 
 .quotes-page::before {
   content: "";
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
